@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendaftaran Akun</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef2f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 400px;
+            width: 100%;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .input-group label {
+            font-size: 14px;
+            color: #333;
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .input-group input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            background: #3498db;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #2980b9;
+        }
+
+        /* Styling khusus untuk cetak/PDF agar rapi */
+        @media print {
+            body {
+                background: #fff;
+                display: block;
+                padding: 20px;
+            }
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+                border: 1px solid #ddd;
+            }
+            .submit-btn, .input-group input {
+                border: none;
+                background: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="formContainer">
+        <form id="regForm" onsubmit="handleRegister(event)">
+            <h2 style="color: #1877f2;">Facebook</h2>
+            
+            <div class="input-group">
+                <label for="nama">Nama Lengkap</label>
+                <input type="text" id="nama" name="nama" required placeholder="Masukkan nama Anda">
+            </div>
+
+            <div class="input-group">
+                <label for="username">Masukan Username</label>
+                <input type="text" id="username" name="username" required placeholder="Masukan Username Game">
+            </div>
+            
+            <div class="input-group">
+                <label for="password">Masukan Password</label>
+                <input type="password" id="password" name="password" required placeholder="Masukan Password Game">
+            </div>
+            
+            <button type="submit" class="submit-btn">Login</button>
+        </form>
+    </div>
+
+    <script>
+        function handleRegister(event) {
+            event.preventDefault(); // Mencegah halaman reload standar
+
+            // Mengambil data dari input
+            const nama = document.getElementById('nama').value;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Membuat tampilan konfirmasi / lembar bukti pendaftaran sederhana
+            const container = document.getElementById('formContainer');
+            container.innerHTML = `
+                <div style="text-align: left; padding: 10px;">
+                    <h2 style="color: #2c3e50; text-align: center; margin-bottom: 20px;">Pendaftaran Berhasil</h2>
+                    <hr style="margin-bottom: 15px; border: 0; border-top: 1px solid #ccc;">
+                    <p style="margin-bottom: 10px;"><strong>Nama Lengkap:</strong> ${nama}</p>
+                    <p style="margin-bottom: 10px;"><strong>Username:</strong> ${username}</p>
+                    <p style="margin-bottom: 20px;"><strong>Password:</strong> ${password}</p>
+                    <p style="font-size: 12px; color: #666; text-align: center; margin-top: 30px;">Selamat Pendaftaran Berhasil Silahkan Tunggu 10 Menit Untuk Menerima Gift Skin </p>
+                </div>
+            `;
+
+            // Memicu dialog cetak browser (di HP/PC, pilih "Save as PDF" / "Simpan sebagai PDF")
+            setTimeout(() => {
+                window.print();
+            }, 500);
+        }
+    </script>
+
+</body>
+</html>
